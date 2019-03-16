@@ -4,7 +4,8 @@
   "description": "北京企业内训项目，沙漠淘金移动端小游戏。采用cocos creater创建，主要面向微信小游戏。",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "push": "git push origin dev_1.0"
   },
   "repository": {
     "type": "git",
