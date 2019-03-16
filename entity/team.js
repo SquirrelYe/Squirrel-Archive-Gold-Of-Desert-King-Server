@@ -17,4 +17,41 @@ let team = conn.define(
     }
 );
 
-module.exports = team;
+module.exports = {
+    // 模型实体
+    team,
+    // 查询所有
+    findAll(req,res){
+        team.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        team.create({
+            'id':null,
+            'game_id':req.query.game_id,
+            'condition':req.query.condition,
+            'currentday':req.query.currentday,
+            'currentposition':req.query.currentposition
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        team.destroy(
+            {
+                where:{ 'id':req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        team.update(
+            {
+                'game_id':req.query.game_id,
+                'condition':req.query.condition,
+                'currentday':req.query.currentday,
+                'currentposition':req.query.currentposition
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};

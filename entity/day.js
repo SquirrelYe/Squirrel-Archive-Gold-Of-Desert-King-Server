@@ -15,8 +15,49 @@ let day = conn.define(
         'whether_desert': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'whether_oasis': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'whether_village': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'whether_gold': { 'type': Sequelize.CHAINTEGERR(11), 'allowNull': tureOrFalse },
+        'whether_gold': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
     }
 );
 
-module.exports = day;
+module.exports = {
+    // 模型实体
+    day,
+    // 查询所有
+    findAll(req,res){
+        day.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        day.create({
+            'id':null,
+            'day':req.query.day,
+            'game_id':req.query.game_id,
+            'whether_desert':req.query.whether_desert,
+            'whether_oasis':req.query.whether_oasis,
+            'whether_village':req.query.whether_village,
+            'whether_gold':req.query.whether_gold
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        day.destroy(
+            {
+                where:{ 'id':req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        day.update(
+            {
+                'day':req.query.day,
+                'game_id':req.query.game_id,
+                'whether_desert':req.query.whether_desert,
+                'whether_oasis':req.query.whether_oasis,
+                'whether_village':req.query.whether_village,
+                'whether_gold':req.query.whether_gold
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};

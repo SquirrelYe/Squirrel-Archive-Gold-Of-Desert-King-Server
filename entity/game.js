@@ -21,4 +21,49 @@ let game = conn.define(
     }
 );
 
-module.exports = game;
+module.exports = {
+    // 模型实体
+    game,
+    // 查询所有
+    findAll(req,res){
+        game.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        game.create({
+            'id':null,
+            'name':req.query.name,
+            'icon':req.query.icon,
+            'start':req.query.start,
+            'stay':req.query.stay,
+            'condition':req.query.condition,
+            'detail':req.query.detail,
+            'day_id':req.query.day_id,
+            'user_id':req.query.user_id
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        game.destroy(
+            {
+                where:{ 'id':req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        game.update(
+            {
+                'name':req.query.name,
+                'icon':req.query.icon,
+                'start':req.query.start,
+                'stay':req.query.stay,
+                'condition':req.query.condition,
+                'detail':req.query.detail,
+                'day_id':req.query.day_id,
+                'user_id':req.query.user_id
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};

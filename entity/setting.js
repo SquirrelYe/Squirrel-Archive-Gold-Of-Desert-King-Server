@@ -15,11 +15,58 @@ let setting = conn.define(
         'diggold': { 'type': Sequelize.INTEGER(1), 'allowNull': tureOrFalse },
         'diecondition': { 'type': Sequelize.INTEGER(1), 'allowNull': tureOrFalse },
         'lostday': { 'type': Sequelize.INTEGER(1), 'allowNull': tureOrFalse },
-        'lostconsume': { 'type': Sequelize.INTEGER(1                                                                                                                     rp), 'allowNull': tureOrFalse },
+        'lostconsume': { 'type': Sequelize.INTEGER(1), 'allowNull': tureOrFalse },
         'beforetime': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'daytime': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'usecondition': { 'type': Sequelize.INTEGER(1), 'allowNull': tureOrFalse }
     }
 );
 
-module.exports = setting;
+module.exports = {
+    // 模型实体
+    setting,
+    // 查询所有
+    findAll(req,res){
+        setting.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        setting.create({
+            'id':null,
+            'game_id':req.query.game_id,
+            'user_id':req.query.user_id,
+            'diggold':req.query.diggold,
+            'diecondition':req.query.diecondition,
+            'lostday':req.query.lostday,
+            'lostconsume':req.query.lostconsume,
+            'beforetime':req.query.beforetime,
+            'daytime':req.query.daytime,
+            'usecondition':req.query.usecondition
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        setting.destroy(
+            {
+                where:{ 'id':req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        setting.update(
+            {
+                'game_id':req.query.game_id,
+                'user_id':req.query.user_id,
+                'diggold':req.query.diggold,
+                'diecondition':req.query.diecondition,
+                'lostday':req.query.lostday,
+                'lostconsume':req.query.lostconsume,
+                'beforetime':req.query.beforetime,
+                'daytime':req.query.daytime,
+                'usecondition':req.query.usecondition
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};

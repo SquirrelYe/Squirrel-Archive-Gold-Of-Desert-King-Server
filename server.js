@@ -1,16 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
-const mail = require('./mail/mail')
-const test = require('./interface/test/test')
-const log=require('./log/log')
+const log = require('./log/log')
 
-// const admin = require('./interface/user&admin/admin')
-
-//关系
-const route=require('./route/route')
+// 路由
+const entity = require('./route/entity')
+const association = require('./route/association')
 
 //测试
 // const oneToOne=require('./interface/test/oneToOne')
@@ -28,7 +23,6 @@ server.use(bodyParser.urlencoded({
 }));
 server.use(objmulter.any());
 server.use(express.static(__dirname));
-server.listen(11111);
 
 server.use(log.log4js.connectLogger(log.loggerExpress))
 
@@ -45,22 +39,20 @@ server.use(bodyParser.urlencoded({
 server.use(express.static(__dirname));
 
 server.use('/', function (req, res, next) {
+    // if(req.query.name != 'yx') res.send('error');
+    // else next();
     next();
 });
 // 加载外部router
-server.use('/ass',route);
+server.use('/ent', entity);
+server.use('/ass', association);
 
 server.get('/index', function (req, res) {
     res.redirect('./WWW/cs.html');
 });
 
-server.use('/admin', function (req, res) { //用户
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    // if(req.query.judge==0) admin.login(req, res)
-    // if(req.query.judge==1) admin.findAll(req, res)
-    // if(req.query.judge==2) admin.delete(req,res)
-    // if(req.query.judge==3) admin.findById(req,res)
-});
+// 监听端口
+server.listen(11111);
 
 //测试
 //-----------------------------------------------------------------------------------

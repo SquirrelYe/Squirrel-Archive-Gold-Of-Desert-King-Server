@@ -21,4 +21,49 @@ let transaction = conn.define(
     }
 );
 
-module.exports = transaction;
+module.exports = {
+    // 模型实体
+    transaction,
+    // 查询所有
+    findAll(req,res){
+        transaction.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        transaction.create({
+            'id':null,
+            'game_id':req.query.game_id,
+            'type':req.query.type,
+            'me':req.query.me,
+            'other':req.query.other,
+            'price':req.query.price,
+            'number':req.query.number,
+            'module_id':req.query.module_id,
+            'condition':req.query.condition
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        transaction.destroy(
+            {
+                where:{ 'id':req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        transaction.update(
+            {
+                'game_id':req.query.game_id,
+                'type':req.query.type,
+                'me':req.query.me,
+                'other':req.query.other,
+                'price':req.query.price,
+                'number':req.query.number,
+                'module_id':req.query.module_id,
+                'condition':req.query.condition
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};

@@ -17,4 +17,41 @@ let statistic = conn.define(
     }
 );
 
-module.exports = statistic;
+module.exports = {
+    // 模型实体
+    statistic,
+    // 查询所有
+    findAll(req,res){
+        statistic.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        statistic.create({
+            'id':null,
+            'team_id':req.query.team_id,
+            'game_id':req.query.game_id,
+            'money':req.query.money,
+            'load':req.query.load
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        statistic.destroy(
+            {
+                where:{ 'id':req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        statistic.update(
+            {
+                'team_id':req.query.team_id,
+                'game_id':req.query.game_id,
+                'money':req.query.money,
+                'load':req.query.load
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};

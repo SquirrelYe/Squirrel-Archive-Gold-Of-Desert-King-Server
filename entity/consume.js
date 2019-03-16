@@ -18,4 +18,43 @@ let consume = conn.define(
     }
 );
 
-module.exports = consume;
+module.exports = {
+    // 模型实体
+    consume,
+    // 查询所有
+    findAll(req,res){
+        consume.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        consume.create({
+            'id':null,
+            'game_id':req.query.game_id,
+            'whether_id':req.query.whether_id,
+            'type':req.query.type,
+            'food':req.query.food,
+            'water':req.query.water
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        consume.destroy(
+            {
+                where:{ id:req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        consume.update(
+            {
+                'game_id':req.query.game_id,
+                'whether_id':req.query.whether_id,
+                'type':req.query.type,
+                'food':req.query.food,
+                'water':req.query.water
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};

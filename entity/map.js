@@ -19,4 +19,45 @@ let map = conn.define(
     }
 );
 
-module.exports = map;
+module.exports = {
+    // 模型实体
+    map,
+    // 查询所有
+    findAll(req,res){
+        map.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        map.create({
+            'id':null,
+            'game_id':req.query.game_id,
+            'desert':req.query.desert,
+            'oasis':req.query.oasis,
+            'tomb':req.query.tomb,
+            'village':req.query.village,
+            'gold':req.query.gold
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        map.destroy(
+            {
+                where:{ 'id':req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        map.update(
+            {
+                'game_id':req.query.game_id,
+                'desert':req.query.desert,
+                'oasis':req.query.oasis,
+                'tomb':req.query.tomb,
+                'village':req.query.village,
+                'gold':req.query.gold
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};

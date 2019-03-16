@@ -15,4 +15,37 @@ let whether = conn.define(
     }
 );
 
-module.exports = whether;
+module.exports = {
+    // 模型实体
+    whether,
+    // 查询所有
+    findAll(req,res){
+        whether.findAll().then( msg => { res.send(msg) })       
+    },    
+    // 新建信息
+    create(req,res){
+        whether.create({
+            'id':null,
+            'game_id':req.query.game_id,
+            'name':req.query.name
+        }).then( msg=>{ res.send(msg); })
+    },
+    // 删除信息
+    delete(req,res){
+        whether.destroy(
+            {
+                where:{ 'id':req.query.id }
+            }
+        ).then( msg=>{ res.send(msg); })
+    },
+    //更新信息
+    update(req,res){
+        whether.update(
+            {
+                'game_id':req.query.game_id,
+                'name':req.query.name
+            },
+            {   'where':{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg); })
+    }
+};
