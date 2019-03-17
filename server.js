@@ -13,6 +13,14 @@ var objmulter = multer({
 });
 
 var server = express();
+// 创建socket.io
+let server_socket = require('http').createServer(server)
+let io = require('socket.io')(server_socket)
+io.on('connection', (data)=> {
+    console.log('连接成功');
+});
+server_socket.listen(3000);
+
 server.use(bodyParser.urlencoded({
     extended: false
 }));
