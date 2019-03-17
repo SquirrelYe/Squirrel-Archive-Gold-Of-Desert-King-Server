@@ -13,8 +13,8 @@ game.belongsTo( map, { foreignKey: 'map_id' });
 
 module.exports = {
     // 查询所有
-    findAll(req,res){
-        game.findAll({
+    findAndCountAll(req,res){
+        game.findAndCountAll({
             include: [{ model: day },{ model : user },{ model : setting },{ model : map }] 
         }).then( msg => { res.send(msg); })
     },

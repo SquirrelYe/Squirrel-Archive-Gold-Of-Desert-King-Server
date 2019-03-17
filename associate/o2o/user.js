@@ -24,8 +24,8 @@ module.exports = {
         })
     },
     // 查询所有
-    findAll(req,res){
-        user.findAll({
+    findAndCountAll(req,res){
+        user.findAndCountAll({
             include: { model: team }
         }).then( msg => { res.send(msg); })
     },

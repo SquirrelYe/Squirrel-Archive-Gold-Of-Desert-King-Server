@@ -27,12 +27,12 @@ module.exports = {
     // 模型实体
     user,
     // 查询所有
-    findAll(req,res){
-        user.findAll().then( msg => { res.send(msg) })       
+    findAndCountAll(req,res){
+        user.findAndCountAll().then( msg => { res.send(msg) })       
     },
     //查询注册时邮箱是否被占用
     selectUsersByEmail(req,res){
-        user.findAll({ 
+        user.findAndCountAll({ 
             'where':{ 'mail':req.query.mail }
          }).then( msg=>{ res.send(msg)  })       
     },
@@ -105,7 +105,7 @@ module.exports = {
     },
     //查询一支队伍的所有人员信息
     findByTeamId(req,res){
-        user.findAll(
+        user.findAndCountAll(
             {
                 'where':{ 'team_id':req.query.team_id }
             }).then( msg=>{ res.send(msg); })

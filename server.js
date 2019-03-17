@@ -7,7 +7,7 @@ const log = require('./log/log')
 const entity = require('./route/entity')
 const association = require('./route/association')
 
-//dest指定上传文件地址
+// dest指定上传文件地址
 var objmulter = multer({
     dest: "./www/upload"
 });

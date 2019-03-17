@@ -42,8 +42,8 @@ module.exports = {
             .then(msg=>{ res.send(msg); })
     },
     // 查询所有 localhost:11111/ass/statistic_module?judge=3
-    findAll(req, res) {
-        statistic.findAll({
+    findAndCountAll(req, res) {
+        statistic.findAndCountAll({
             include: { model: modul }
         }).then(msg=>{ res.send(msg); })
     }

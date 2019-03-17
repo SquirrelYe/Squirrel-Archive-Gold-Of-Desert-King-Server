@@ -9,8 +9,8 @@ setting.belongsTo( game, { foreignKey: 'game_id' });
 
 module.exports = {
     // 查询所有
-    findAll(req,res){
-        setting.findAll({
+    findAndCountAll(req,res){
+        setting.findAndCountAll({
             include: [{ model: user },{ model: game }]
         }).then( msg => { res.send(msg); })
     },

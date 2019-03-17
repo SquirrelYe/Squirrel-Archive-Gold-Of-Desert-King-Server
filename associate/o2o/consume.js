@@ -9,8 +9,8 @@ consume.belongsTo( whether, { foreignKey: 'whether_id' });
 
 module.exports = {
     // 查询所有
-    findAll(req,res){
-        consume.findAll({
+    findAndCountAll(req,res){
+        consume.findAndCountAll({
             include: [{ model: game },{ model: whether }]
         }).then( msg => { res.send(msg); })
     },

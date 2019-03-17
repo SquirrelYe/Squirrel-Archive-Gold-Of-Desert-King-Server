@@ -25,8 +25,8 @@ module.exports = {
     // 模型实体
     game,
     // 查询所有
-    findAll(req,res){
-        game.findAll().then( msg => { res.send(msg) })       
+    findAndCountAll(req,res){
+        game.findAndCountAll().then( msg => { res.send(msg) })       
     },    
     // 新建信息
     create(req,res){

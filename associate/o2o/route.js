@@ -9,8 +9,8 @@ route.belongsTo( game, { foreignKey: 'game_id' });
 
 module.exports = {
     // 查询所有
-    findAll(req,res){
-        route.findAll({
+    findAndCountAll(req,res){
+        route.findAndCountAll({
             include: [{ model: team },{ model: game }]
         }).then( msg => { res.send(msg); })
     },

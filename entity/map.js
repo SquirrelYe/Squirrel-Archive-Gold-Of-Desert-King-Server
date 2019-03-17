@@ -23,8 +23,8 @@ module.exports = {
     // 模型实体
     map,
     // 查询所有
-    findAll(req,res){
-        map.findAll().then( msg => { res.send(msg) })       
+    findAndCountAll(req,res){
+        map.findAndCountAll().then( msg => { res.send(msg) })       
     },    
     // 新建信息
     create(req,res){

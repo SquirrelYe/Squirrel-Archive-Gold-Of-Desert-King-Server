@@ -7,8 +7,8 @@ map.belongsTo( game, { foreignKey: 'game_id' });
 
 module.exports = {
     // 查询所有
-    findAll(req,res){
-        map.findAll({
+    findAndCountAll(req,res){
+        map.findAndCountAll({
             include: { model: game }
         }).then( msg => { res.send(msg); })
     },

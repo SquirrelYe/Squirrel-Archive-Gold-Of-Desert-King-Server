@@ -24,8 +24,8 @@ module.exports = {
         })
     },
     // 查询所有
-    findAll(req,res){
-        team.findAll({
+    findAndCountAll(req,res){
+        team.findAndCountAll({
             include: { model: game }
         }).then( msg => { res.send(msg); })
     },

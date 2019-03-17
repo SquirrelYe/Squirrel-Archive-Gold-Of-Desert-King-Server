@@ -7,8 +7,8 @@ whether.belongsTo( game, { foreignKey: 'game_id' });
 
 module.exports = {
     // 查询所有
-    findAll(req,res){
-        whether.findAll({
+    findAndCountAll(req,res){
+        whether.findAndCountAll({
             include: { model: game }
         }).then( msg => { res.send(msg); })
     },
