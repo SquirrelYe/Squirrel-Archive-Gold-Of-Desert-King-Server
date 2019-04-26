@@ -2,8 +2,10 @@ var co = require('co');
 // 导入模型
 const team = require('../../entity/team').team;
 const game = require('../../entity/game').game;
+const statistic = require('../../entity/statistic').statistic;
 // 关联对象
 team.belongsTo( game, { foreignKey: 'game_id' });
+team.belongsTo( statistic, { foreignKey: 'statistic_id' });
 
 module.exports = {
     // 绑定实体关系
@@ -22,18 +24,18 @@ module.exports = {
             yield m.setGame(null) 
             .then( msg => { res.send(msg); })
         })
-    },
-    // 查询所有
+    }, 
+    // 查询所有  localhost:11111/ass/team?judge=2
     findAndCountAll(req,res){
         team.findAndCountAll({
-            include: { model: game }
+            include: [{ model: game },{ model: statistic }]
         }).then( msg => { res.send(msg); })
     },
-    // 按id查询
+    // 按id查询  localhost:11111/ass/team?judge=3&team_id=1
     findById(req,res){
         team.findOne({
             where:{ 'id':req.query.team_id },
-            include: { model: team }
+            include: [{ model: game },{ model: statistic }]
         }).then( msg => { res.send(msg); })
     },
 }

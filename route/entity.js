@@ -47,6 +47,7 @@ router.use('/statistic', function (req, res) {
     if(req.query.judge==1) statistic.create(req, res)
     if(req.query.judge==2) statistic.delete(req,res)
     if(req.query.judge==3) statistic.update(req,res)
+    if(req.query.judge==4) statistic.deleteAllByGameId(req,res)
 });
 // 游戏物品
 router.use('/module', function (req, res) { 

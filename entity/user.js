@@ -18,7 +18,8 @@ let user = conn.define(
         'phone': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse },
         'condition': { 'type': Sequelize.INTEGER(2), 'allowNull': tureOrFalse },
         'team_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'job': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse }
+        'job': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse },
+        'openid': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
     }
 );
 
@@ -39,7 +40,7 @@ module.exports = {
     //查询参赛者是否有队伍
     selectUsersHaveTeam(req,res){
         user.findOne({
-            'attributes':['company_id'],
+            'attributes':['team_id'],
             'where':{ 'id':req.query.user_id }
         }).then(msg=>{ res.send(msg)  });        
     },    
@@ -67,6 +68,7 @@ module.exports = {
                 'mail':req.query.mail,
                 'phone':req.query.phone,
                 'condition':req.query.condition,
+                'openid':req.query.openid
             }
         }).then( msg=>{ res.send(msg); })
     },
@@ -82,9 +84,9 @@ module.exports = {
     delete(req,res){
         user.destroy(
             {
-                where:{ id:req.query.id }
+                where:{ 'id':req.query.id }
             }
-        ).then( msg=>{ res.send(msg); })
+        ).then( msg=>{ res.send({'affectRows':msg}); })
     },
     //更新用户信息
     update(req,res){
@@ -98,7 +100,8 @@ module.exports = {
                 'phone':req.query.phone,
                 'condition':req.query.condition,
                 'team_id':req.query.team_id,
-                'job':req.query.job
+                'job':req.query.job,
+                'openid':req.query.openid
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })

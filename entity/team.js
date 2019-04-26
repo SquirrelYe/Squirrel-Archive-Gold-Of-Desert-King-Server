@@ -10,10 +10,12 @@ let team = conn.define(
     // 字段定义（主键、created_at、updated_at默认包含，不用特殊定义）
     {
         'id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse, 'primaryKey': true, 'autoIncrement': true },
+        'name': { 'type': Sequelize.CHAR(225), 'allowNull': tureOrFalse },
         'game_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'condition': { 'type': Sequelize.INTEGER(2), 'allowNull': tureOrFalse },
         'currentday': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'currentposition': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'statistic_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
     }
 );
 
@@ -28,10 +30,12 @@ module.exports = {
     create(req,res){
         team.create({
             'id':null,
+            'name':req.query.name,
             'game_id':req.query.game_id,
             'condition':req.query.condition,
             'currentday':req.query.currentday,
-            'currentposition':req.query.currentposition
+            'currentposition':req.query.currentposition,
+            'statistic_id':req.query.statistic_id
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -40,16 +44,18 @@ module.exports = {
             {
                 where:{ 'id':req.query.id }
             }
-        ).then( msg=>{ res.send(msg); })
+        ).then( msg=>{ res.send({'affectRows':msg}); })
     },
     //更新信息
     update(req,res){
         team.update(
             {
+                'name':req.query.name,
                 'game_id':req.query.game_id,
                 'condition':req.query.condition,
                 'currentday':req.query.currentday,
-                'currentposition':req.query.currentposition
+                'currentposition':req.query.currentposition,
+                'statistic_id':req.query.statistic_id
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })

@@ -13,9 +13,7 @@ let modul = conn.define(
         'game_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'type': { 'type': Sequelize.INTEGER(2), 'allowNull': tureOrFalse },
         'price': { 'type': Sequelize.DOUBLE(10), 'allowNull': tureOrFalse },
-        'weight': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'village': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'time': { 'type': Sequelize.INTEGER(2), 'allowNull': tureOrFalse }
+        'weight': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
     }
 );
 
@@ -33,9 +31,7 @@ module.exports = {
             'game_id':req.query.game_id,
             'type':req.query.type,
             'price':req.query.price,
-            'weight':req.query.weight,
-            'village':req.query.village,
-            'time':req.query.time
+            'weight':req.query.weight
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -53,9 +49,7 @@ module.exports = {
                 'game_id':req.query.game_id,
                 'type':req.query.type,
                 'price':req.query.price,
-                'weight':req.query.weight,
-                'village':req.query.village,
-                'time':req.query.time
+                'weight':req.query.weight
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })

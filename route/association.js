@@ -23,8 +23,9 @@ router.use('/user',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
     if(req.query.judge==0) user.set(req,res);
     if(req.query.judge==1) user.del(req,res);
-    if(req.query.judge==2) user.findAndCountAll(req,res);
+    if(req.query.judge==2) user.findAndCountAllByType(req,res);
     if(req.query.judge==3) user.findById(req,res);
+    if(req.query.judge==4) user.findByTeam(req,res);
 })
 router.use('/team',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -37,11 +38,13 @@ router.use('/statistic',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
     if(req.query.judge==0) statistic.findAndCountAll(req,res);
     if(req.query.judge==1) statistic.findById(req,res);
+    if(req.query.judge==2) statistic.findByGameId(req,res);
 })
 router.use('/game',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
     if(req.query.judge==0) game.findAndCountAll(req,res);
     if(req.query.judge==1) game.findById(req,res);
+    if(req.query.judge==2) game.findByCondition(req,res);
 })
 router.use('/day',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -90,4 +93,6 @@ router.use('/statistic_module',function(req,res){
     if(req.query.judge==1) statistic_module.findOrCreate(req,res);
     if(req.query.judge==2) statistic_module.update_number(req,res);
     if(req.query.judge==3) statistic_module.findAndCountAll(req,res);
+    if(req.query.judge==4) statistic_module.findAllTeamStock(req,res);
+    if(req.query.judge==5) statistic_module.findOneThingStock(req,res);
 })

@@ -37,14 +37,29 @@ module.exports = {
         statistic_module.update(
             { 'number':req.query.number },
             { 
-                'where':{ 'id':req.query.statistic_module_id }
+                'where':{ 'id':req.query.id }
             })
-            .then(msg=>{ res.send(msg); })
+            .then(msg=>{ res.send({'affectRows':msg}); })
     },
     // 查询所有 localhost:11111/ass/statistic_module?judge=3
     findAndCountAll(req, res) {
         statistic.findAndCountAll({
             include: { model: modul }
+        }).then(msg=>{ res.send(msg); })
+    },
+    // 查询所有team localhost:11111/ass/statistic_module?judge=3
+    findAllTeamStock(req, res) {
+        statistic.findOne({
+            'where':{ 'id':req.query.statistic_id },
+            include: { model: modul }
+        }).then(msg=>{ res.send(msg); })
+    },
+    findOneThingStock(req,res){
+        statistic_module.findOne({
+            'where':{ 
+                'statistic_id':req.query.statistic_id,
+                'module_id':req.query.module_id,
+            }
         }).then(msg=>{ res.send(msg); })
     }
 

@@ -48,7 +48,7 @@ module.exports = {
             {
                 where:{ 'id':req.query.id }
             }
-        ).then( msg=>{ res.send(msg); })
+        ).then( msg=>{ res.send({'affectRows':msg}); })
     },
     //更新信息
     update(req,res){

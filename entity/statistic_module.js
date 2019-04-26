@@ -12,7 +12,8 @@ let statistic_module = conn.define(
         'id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse, 'primaryKey': true, 'autoIncrement': true },
         'statistic_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'module_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'number': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
+        'number': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'use': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
     }
 );
 

@@ -17,7 +17,8 @@ let transaction = conn.define(
         'price': { 'type': Sequelize.DOUBLE(10), 'allowNull': tureOrFalse },
         'number': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'module_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'condition': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
+        'condition': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'detail': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse }
     }
 );
 
@@ -39,7 +40,8 @@ module.exports = {
             'price':req.query.price,
             'number':req.query.number,
             'module_id':req.query.module_id,
-            'condition':req.query.condition
+            'condition':req.query.condition,
+            'detail':req.query.detail
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -61,7 +63,8 @@ module.exports = {
                 'price':req.query.price,
                 'number':req.query.number,
                 'module_id':req.query.module_id,
-                'condition':req.query.condition
+                'condition':req.query.condition,
+                'detail':req.query.detail
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })

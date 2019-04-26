@@ -23,16 +23,24 @@ module.exports = {
             .then( msg => { res.send(msg); })
         })
     },
-    // 查询所有
-    findAndCountAll(req,res){
+    // 按type查询  localhost:11111/ass/user?judge=2&type=1
+    findAndCountAllByType(req,res){
         user.findAndCountAll({
+            where:{ 'type':req.query.type },
             include: { model: team }
         }).then( msg => { res.send(msg); })
     },
-    // 按id查询
+    // 按id查询  localhost:11111/ass/user?judge=3&user_id=1
     findById(req,res){
         user.findOne({
             where:{ 'id':req.query.user_id },
+            include: { model: team }
+        }).then( msg => { res.send(msg); })
+    },
+    // 按team查询 
+    findByTeam(req,res){
+        user.findAndCountAll({
+            where:{ 'team_id':req.query.team_id },
             include: { model: team }
         }).then( msg => { res.send(msg); })
     },
