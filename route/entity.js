@@ -39,6 +39,8 @@ router.use('/team', function (req, res) {
     if(req.query.judge==1) team.create(req, res)
     if(req.query.judge==2) team.delete(req,res)
     if(req.query.judge==3) team.update(req,res)
+    if(req.query.judge==4) team.findAllByMap(req,res)
+
 });
 // 背包
 router.use('/statistic', function (req, res) { 
@@ -48,6 +50,7 @@ router.use('/statistic', function (req, res) {
     if(req.query.judge==2) statistic.delete(req,res)
     if(req.query.judge==3) statistic.update(req,res)
     if(req.query.judge==4) statistic.deleteAllByGameId(req,res)
+    if(req.query.judge==5) statistic.findById(req, res)
 });
 // 游戏物品
 router.use('/module', function (req, res) { 

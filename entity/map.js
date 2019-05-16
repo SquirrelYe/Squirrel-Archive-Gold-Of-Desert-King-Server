@@ -11,11 +11,7 @@ let map = conn.define(
     {
         'id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse, 'primaryKey': true, 'autoIncrement': true },
         'game_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'desert': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse },
-        'oasis': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse },
-        'tomb': { 'type': Sequelize.CHAR(225), 'allowNull': tureOrFalse },
-        'village': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse },
-        'gold': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse }
+        'land': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse }
     }
 );
 
@@ -29,13 +25,9 @@ module.exports = {
     // 新建信息
     create(req,res){
         map.create({
-            'id':null,
+            'id':req.query.id,
             'game_id':req.query.game_id,
-            'desert':req.query.desert,
-            'oasis':req.query.oasis,
-            'tomb':req.query.tomb,
-            'village':req.query.village,
-            'gold':req.query.gold
+            'land':req.query.land
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -51,11 +43,7 @@ module.exports = {
         map.update(
             {
                 'game_id':req.query.game_id,
-                'desert':req.query.desert,
-                'oasis':req.query.oasis,
-                'tomb':req.query.tomb,
-                'village':req.query.village,
-                'gold':req.query.gold
+                'land':req.query.land
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })

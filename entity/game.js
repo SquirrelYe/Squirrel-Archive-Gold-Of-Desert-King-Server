@@ -18,6 +18,7 @@ let game = conn.define(
         'detail': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'day_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'user_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'judgewhether': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
     }
 );
 
@@ -39,7 +40,8 @@ module.exports = {
             'condition':req.query.condition,
             'detail':req.query.detail,
             'day_id':req.query.day_id,
-            'user_id':req.query.user_id
+            'user_id':req.query.user_id,
+            'judgewhether':req.query.judgewhether
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -61,7 +63,8 @@ module.exports = {
                 'condition':req.query.condition,
                 'detail':req.query.detail,
                 'day_id':req.query.day_id,
-                'user_id':req.query.user_id
+                'user_id':req.query.user_id,
+                'judgewhether':req.query.judgewhether
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })

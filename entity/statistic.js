@@ -10,6 +10,7 @@ let statistic = conn.define(
     // 字段定义（主键、created_at、updated_at默认包含，不用特殊定义）
     {
         'id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse, 'primaryKey': true, 'autoIncrement': true },
+        'team_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'game_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'money': { 'type': Sequelize.DOUBLE(11), 'allowNull': tureOrFalse },
         'load': { 'type': Sequelize.DOUBLE(11), 'allowNull': tureOrFalse },
@@ -33,6 +34,7 @@ module.exports = {
     create(req,res){
         statistic.create({
             'id':null,
+            'team_id':req.query.team_id,
             'game_id':req.query.game_id,
             'money':req.query.money,
             'load':req.query.load,
@@ -57,6 +59,7 @@ module.exports = {
         statistic.update(
             {
                 'team_id':req.query.team_id,
+                'game_id':req.query.game_id,
                 'money':req.query.money,
                 'load':req.query.load,
                 'food':req.query.food,
@@ -76,5 +79,11 @@ module.exports = {
                 where:{ 'game_id':req.query.game_id }
             }
         ).then( msg=>{ res.send({'affectRows':msg}); })
+    },
+    // 按ID查找
+    findById(req,res){
+        statistic.findOne({
+            where:{ 'id':req.query.id }
+        }).then( msg=>{ res.send(msg)})
     }
 };

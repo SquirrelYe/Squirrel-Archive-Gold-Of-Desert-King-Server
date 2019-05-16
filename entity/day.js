@@ -16,6 +16,7 @@ let day = conn.define(
         'whether_oasis': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'whether_village': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'whether_gold': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'whether_tomb': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
     }
 );
 
@@ -35,7 +36,8 @@ module.exports = {
             'whether_desert':req.query.whether_desert,
             'whether_oasis':req.query.whether_oasis,
             'whether_village':req.query.whether_village,
-            'whether_gold':req.query.whether_gold
+            'whether_gold':req.query.whether_gold,
+            'whether_tomb':req.query.whether_tomb
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -55,7 +57,8 @@ module.exports = {
                 'whether_desert':req.query.whether_desert,
                 'whether_oasis':req.query.whether_oasis,
                 'whether_village':req.query.whether_village,
-                'whether_gold':req.query.whether_gold
+                'whether_gold':req.query.whether_gold,
+                'whether_tomb':req.query.whether_tomb
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })

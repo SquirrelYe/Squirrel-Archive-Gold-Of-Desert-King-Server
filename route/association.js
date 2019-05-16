@@ -33,6 +33,7 @@ router.use('/team',function(req,res){
     if(req.query.judge==1) team.del(req,res);
     if(req.query.judge==2) team.findAndCountAll(req,res);
     if(req.query.judge==3) team.findById(req,res);
+    if(req.query.judge==4) team.findByGameId(req,res);
 })
 router.use('/statistic',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -68,6 +69,7 @@ router.use('/route',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
     if(req.query.judge==0) route.findAndCountAll(req,res);
     if(req.query.judge==1) route.findById(req,res);
+    if(req.query.judge==2) route.findByTeamId(req,res);
 })
 router.use('/setting',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");

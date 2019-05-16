@@ -13,9 +13,10 @@ let team = conn.define(
         'name': { 'type': Sequelize.CHAR(225), 'allowNull': tureOrFalse },
         'game_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'condition': { 'type': Sequelize.INTEGER(2), 'allowNull': tureOrFalse },
-        'currentday': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'currentposition': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'day_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'map_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'statistic_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'lose': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
     }
 );
 
@@ -33,9 +34,10 @@ module.exports = {
             'name':req.query.name,
             'game_id':req.query.game_id,
             'condition':req.query.condition,
-            'currentday':req.query.currentday,
-            'currentposition':req.query.currentposition,
-            'statistic_id':req.query.statistic_id
+            'day_id':req.query.day_id,
+            'map_id':req.query.map_id,
+            'statistic_id':req.query.statistic_id,
+            'lose':req.query.lose
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -53,11 +55,20 @@ module.exports = {
                 'name':req.query.name,
                 'game_id':req.query.game_id,
                 'condition':req.query.condition,
-                'currentday':req.query.currentday,
-                'currentposition':req.query.currentposition,
-                'statistic_id':req.query.statistic_id
+                'day_id':req.query.day_id,
+                'map_id':req.query.map_id,
+                'statistic_id':req.query.statistic_id,
+                'lose':req.query.lose
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })
+    },
+    // 查询某一位置的人
+    findAllByMap(req,res){
+        team.findAndCountAll(
+            {
+                where:{ 'map_id':req.query.map_id }
+            }
+        ).then( msg=>{ res.send(msg); })
     }
 };

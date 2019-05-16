@@ -12,7 +12,7 @@ let route = conn.define(
         'id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse, 'primaryKey': true, 'autoIncrement': true },
         'team_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'game_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
-        'position': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
+        'map_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
     }
 );
 
@@ -30,7 +30,7 @@ module.exports = {
             'id':null,
             'team_id':req.query.team_id,
             'game_id':req.query.game_id,
-            'position':req.query.position
+            'map_id':req.query.map_id
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -47,7 +47,7 @@ module.exports = {
             {
                 'team_id':req.query.team_id,
                 'game_id':req.query.game_id,
-                'position':req.query.position
+                'map_id':req.query.map_id
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })

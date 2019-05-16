@@ -28,14 +28,20 @@ module.exports = {
                 'id':null,
                 'statistic_id':req.query.statistic_id,
                 'module_id':req.query.module_id,
-                'number':req.query.number
+                'number':req.query.number,
+                'use':req.query.use
             }
         }).then(msg=>{ res.send(msg); })
     },
     // 更新数量 localhost:11111/ass/statistic_module?judge=2&statistic_module_id=1&number=2
     update_number(req,res){
         statistic_module.update(
-            { 'number':req.query.number },
+            {                
+                'statistic_id':req.query.statistic_id,
+                'module_id':req.query.module_id,
+                'number':req.query.number,
+                'use':req.query.use
+            },
             { 
                 'where':{ 'id':req.query.id }
             })
