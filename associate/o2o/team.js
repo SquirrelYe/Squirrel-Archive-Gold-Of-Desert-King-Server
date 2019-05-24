@@ -49,4 +49,11 @@ module.exports = {
             include: [{ model: game },{ model: statistic },{ model: map },{ model: day }]
         }).then( msg => { res.send(msg); })
     },
+    // 按game_id查询  
+    findByMapId(req,res){
+        team.findAndCountAll({
+            where:{ 'map_id':req.query.map_id },
+            include: [{ model: game },{ model: statistic },{ model: map },{ model: day }]
+        }).then( msg => { res.send(msg); })
+    },
 }

@@ -18,6 +18,7 @@ let user = conn.define(
         'phone': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse },
         'condition': { 'type': Sequelize.INTEGER(2), 'allowNull': tureOrFalse },
         'team_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'game_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'job': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse },
         'openid': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
     }
@@ -100,6 +101,7 @@ module.exports = {
                 'phone':req.query.phone,
                 'condition':req.query.condition,
                 'team_id':req.query.team_id,
+                'game_id':req.query.game_id,
                 'job':req.query.job,
                 'openid':req.query.openid
             },

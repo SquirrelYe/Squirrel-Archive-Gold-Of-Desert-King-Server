@@ -14,13 +14,15 @@ module.exports = {
     // 查询所有 localhost:11111/ass/transaction?judge=0
     findAndCountAll(req,res){
         transaction.findAndCountAll({
-            include: [{ model: game },{ model: team,as:'out' },{ model: team,as:'in' },{ model: modul }]
+            include: [{ model: game },{ model: team,as:'out' },{ model: team,as:'in' },{ model: modul }],
+            order:[['created_at', 'DESC']]
         }).then( msg => { res.send(msg); })
     },
     // 按id查询 localhost:11111/ass/transaction?judge=1&transaction_id=1
     findById(req,res){
         transaction.findOne({
             where:{ 'id':req.query.transaction_id },
+            order:[['created_at', 'DESC']],
             include: [{ model: game },{ model: team,as:'out' },{ model: team,as:'in' },{ model: modul }]
         }).then( msg => { res.send(msg); })
     },
@@ -28,6 +30,7 @@ module.exports = {
     findByMe(req,res){
         transaction.findAndCountAll({
             where:{ 'me':req.query.team_id },
+            order:[['created_at', 'DESC']],
             include: [{ model: game },{ model: team,as:'out' },{ model: team,as:'in' },{ model: modul }]
         }).then( msg => { res.send(msg); })
     },
@@ -35,6 +38,7 @@ module.exports = {
     findByOther(req,res){
         transaction.findAndCountAll({
             where:{ 'other':req.query.team_id },
+            order:[['created_at', 'DESC']],
             include: [{ model: game },{ model: team,as:'out' },{ model: team,as:'in' },{ model: modul }]
         }).then( msg => { res.send(msg); })
     },
@@ -47,6 +51,7 @@ module.exports = {
                         {'other':req.query.team_id}
                     ] 
                 },
+                order:[['created_at', 'DESC']],
                 include: [{ model: game },{ model: team,as:'out' },{ model: team,as:'in' },{ model: modul }]
             }).then( msg => { res.send(msg); })
     },

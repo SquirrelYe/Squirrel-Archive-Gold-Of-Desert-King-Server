@@ -34,6 +34,7 @@ router.use('/team',function(req,res){
     if(req.query.judge==2) team.findAndCountAll(req,res);
     if(req.query.judge==3) team.findById(req,res);
     if(req.query.judge==4) team.findByGameId(req,res);
+    if(req.query.judge==5) team.findByMapId(req,res);
 })
 router.use('/statistic',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
