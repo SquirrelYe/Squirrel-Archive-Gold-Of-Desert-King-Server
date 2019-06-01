@@ -114,5 +114,12 @@ module.exports = {
             {
                 'where':{ 'team_id':req.query.team_id }
             }).then( msg=>{ res.send(msg); })
+    },
+    //查询一支队伍的所有人员信息
+    findById(req,res){
+        user.findOne(
+            {
+                'where':{ 'id':req.query.id }
+            }).then( msg=>{ res.send(msg); })
     }
 };

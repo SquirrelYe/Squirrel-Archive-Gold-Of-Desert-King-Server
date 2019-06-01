@@ -31,6 +31,7 @@ router.use('/user', function (req, res) {
     if(req.query.judge==6) user.login(req,res)
     if(req.query.judge==7) user.updatePass(req,res)
     if(req.query.judge==8) user.findByTeamId(req,res)
+    if(req.query.judge==9) user.findById(req,res)
 });
 // 团队
 router.use('/team', function (req, res) { 
