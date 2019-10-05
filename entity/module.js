@@ -12,6 +12,7 @@ let modul = conn.define(
         'id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse, 'primaryKey': true, 'autoIncrement': true },
         'game_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'type': { 'type': Sequelize.INTEGER(2), 'allowNull': tureOrFalse },
+        'name': { 'type': Sequelize.CHAR(255), 'allowNull': tureOrFalse },
         'price': { 'type': Sequelize.DOUBLE(10), 'allowNull': tureOrFalse },
         'weight': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
     }
@@ -30,6 +31,7 @@ module.exports = {
             'id':null,
             'game_id':req.query.game_id,
             'type':req.query.type,
+            'name':req.query.name,
             'price':req.query.price,
             'weight':req.query.weight
         }).then( msg=>{ res.send(msg); })
@@ -48,6 +50,7 @@ module.exports = {
             {
                 'game_id':req.query.game_id,
                 'type':req.query.type,
+                'name':req.query.name,
                 'price':req.query.price,
                 'weight':req.query.weight
             },
