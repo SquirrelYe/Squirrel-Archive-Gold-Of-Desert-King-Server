@@ -17,6 +17,7 @@ let team = conn.define(
         'map_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'statistic_id': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
         'lose': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse },
+        'isDig': { 'type': Sequelize.INTEGER(11), 'allowNull': tureOrFalse }
     }
 );
 
@@ -37,7 +38,8 @@ module.exports = {
             'day_id':req.query.day_id,
             'map_id':req.query.map_id,
             'statistic_id':req.query.statistic_id,
-            'lose':req.query.lose
+            'lose':req.query.lose,
+            'isDig':req.query.isDig
         }).then( msg=>{ res.send(msg); })
     },
     // 删除信息
@@ -58,7 +60,8 @@ module.exports = {
                 'day_id':req.query.day_id,
                 'map_id':req.query.map_id,
                 'statistic_id':req.query.statistic_id,
-                'lose':req.query.lose
+                'lose':req.query.lose,
+                'isDig':req.query.isDig
             },
             {   'where':{ 'id':req.query.id }
         }).then( msg=>{ res.send(msg); })
