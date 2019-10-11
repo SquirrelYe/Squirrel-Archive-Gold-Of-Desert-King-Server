@@ -13,6 +13,7 @@ const route = require('../associate/o2o/route')
 const setting = require('../associate/o2o/setting')
 const whether = require('../associate/o2o/whether')
 const map = require('../associate/o2o/map')
+const rank = require('../associate/o2o/rank')
 
 const statistic_module = require('../associate/m2m/statistic_module')
 
@@ -86,6 +87,12 @@ router.use('/map',function(req,res){
     res.setHeader("Access-Control-Allow-Origin", "*");
     if(req.query.judge==0) map.findAndCountAll(req,res);
     if(req.query.judge==1) map.findById(req,res);
+})
+router.use('/rank',function(req,res){
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    if(req.query.judge==0) rank.findAndCountAll(req,res);
+    if(req.query.judge==1) rank.findById(req,res);
+    if(req.query.judge==2) rank.findOneByGameId(req,res);
 })
 // 一对多
 

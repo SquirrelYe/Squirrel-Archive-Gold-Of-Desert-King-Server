@@ -14,6 +14,7 @@ const route = require('../entity/route')
 const setting = require('../entity/setting')
 const whether = require('../entity/whether')
 const map = require('../entity/map')
+const rank = require('../entity/rank')
 
 module.exports = router
 
@@ -124,4 +125,12 @@ router.use('/map', function (req, res) {
     if(req.query.judge==1) map.create(req, res)
     if(req.query.judge==2) map.delete(req,res)
     if(req.query.judge==3) map.update(req,res)
+});
+// 游戏排名
+router.use('/rank', function (req, res) { 
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    if(req.query.judge==0) rank.findAndCountAll(req, res)
+    if(req.query.judge==1) rank.create(req, res)
+    if(req.query.judge==2) rank.delete(req,res)
+    if(req.query.judge==3) rank.update(req,res)
 });
