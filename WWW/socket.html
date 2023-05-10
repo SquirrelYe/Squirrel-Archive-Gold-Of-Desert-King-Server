@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>how to use socket</title>
     <script src="./assets/js/socket.io.js"></script>
     <script src="./assets/js/jquery.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <form action="#">
-        <input type="text" id="message">
-        <button id="send">send</button>
+      <input type="text" id="message" />
+      <button id="send">send</button>
     </form>
     <script>
-        // 1. 与服务器端建立连接
-        const socket = io.connect("http://localhost:3000");
+      // 1. 与服务器端建立连接
+      const socket = io.connect("http://localhost:3000");
 
-        // 2. 监听send按钮点击的事件
-        $("#send").click(function(){
-            // 获取输入的信息
-            let message = $("#message").val().trim();
-            // 向服务器端发送信息
-            socket.emit("sentToServer", message);
-        });
+      // 2. 监听send按钮点击的事件
+      $("#send").click(function () {
+        // 获取输入的信息
+        let message = $("#message").val().trim();
+        // 向服务器端发送信息
+        socket.emit("sentToServer", message);
+      });
 
-        // 3. 获取服务端发送过来的信息
-        socket.on("sendToClient", message => {
-            console.log(message);
-        });
-        /**
-         * 发布订阅(广播), 一端发布, 可以让多端触发
-         */
+      // 3. 获取服务端发送过来的信息
+      socket.on("sendToClient", (message) => {
+        console.log(message);
+      });
+      /**
+       * 发布订阅(广播), 一端发布, 可以让多端触发
+       */
     </script>
-</body>
+  </body>
 </html>
